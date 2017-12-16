@@ -22,13 +22,13 @@ let options = {
 let chrisoRules = [
   ['field_contains', 'contains', ['seed']],
   ['field_equals', 'equals', ['value']],
-  ['field_isAfter', 'isAfter', [new Date()]],
+  ['field_isAfter', 'isAfter', ['12/12/12']],
   ['field_isAlpha', 'isAlpha', ['en-US']],
   ['field_isAlphanumeric', 'isAlphanumeric', ['en-US']],
   ['field_isAscii', 'isAscii'],
   ['field_isBase64', 'isBase64'],
 
-  ['field_isBefore', 'isBefore', ['xx']],
+  ['field_isBefore', 'isBefore', ['12/12/12']],
   ['field_isBoolean', 'isBoolean'],
   ['field_isByteLength', 'isByteLength', [{min:0, max: 20}]],
   ['field_isCreditCard', 'isCreditCard'],
