@@ -1,0 +1,10 @@
+{
+  "unique": "Expecting unique value in '%1$s' field",
+  "isUUID": "Value for field '%1$s' must be a valid UUIDv%2$s",
+  "isEmail": "Value for field '%1$s' must be a valid email address",
+  "matches": "Can't find match value on enum field '%1$s'. Expecting '%3$s'",
+  "required": "Value for field '%1$s' is required",
+  "isLength": "Value for field '%1$s' must have a minimum length of %3$s and maximum length of %4$s characters",
+  "minlength": "Value for field '%1$s' must be atleast in %3$s character(s).",
+  "maxlength": "Value for field '%1$s' must not exceed in %3$s character(s)."
+}

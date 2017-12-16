@@ -1,16 +1,17 @@
 'use strict'
 
-require('./model')()
-const halter = require('../index')
-
 const _ = require('lodash')
 const restify = require('restify')
 const BPromise = require('bluebird')
 const mongoose = require('mongoose')
-const WalterBuilder = require('walter-builder')
+
+require('./model')()
+const halter = require('../index').halter
+const Builder = require('../index').builder
 
 const server = restify.createServer({ name: 'myapp', version: '1.0.0'});
-let builder = new WalterBuilder({
+
+let builder = new Builder({
   uuid: true,
   model: mongoose.model('TestModel'),
   templates: {

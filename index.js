@@ -4,7 +4,9 @@ const _ = require('lodash')
 const BPromise = require('bluebird')
 const Halter = require('./lib/halter')
 
-module.exports = (options) => {
+module.exports.builder = require('./lib/builder')
+
+module.exports.halter = (options) => {
   let halter = new Halter(options)
 
   return (req, res, next) => {
