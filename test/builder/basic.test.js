@@ -122,7 +122,7 @@ describe('Basic model build test', function () {
 
   describe('# nested fields', function () {
     nestedFields.forEach(field => {
-      it(`${field}- required`, function (done) {
+      it(`${field} - has required rule`, function (done) {
         if ((new RegExp(`${field.replace(/[.*]/g, '\\$&')}.*is required$`)).test(schema[field].required.msg)) {
           done()
         }
