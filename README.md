@@ -1,5 +1,5 @@
 # wallter
-Highly influenced by [ctavan/express-validator](https://github.com/ctavan/express-validator) and relying from [chriso/validator.js](https://github.com/chriso/validator.js), wallter does almost the same goal as validator. The edge is, it supports auto validation for arrays, nested arrays, and/or nested arrays of objects without using `customValidator` workaround. It is intended to use the schema based method and has the ability to build a validation schema straigth from your mongoose model.
+Highly influenced by [ctavan/express-validator](https://github.com/ctavan/express-validator) and relying from [chriso/validator.js](https://github.com/chriso/validator.js), wallter does almost the same goal as validator. The edge is, it supports auto validation for arrays, nested arrays, and/or nested arrays of objects without using `customValidator` workaround. Ir uses the schema based method and has the ability to build a validation schema straigth from your mongoose model.
 
 # Installation
 
@@ -13,11 +13,18 @@ require('./model')()
 const restify = require('restify')
 const mongoose = require('mongoose')
 
-const halter = require('../../index').halter
-const Builder = require('../../index').builder
+const halter = require('wallter').halter
+const Builder = require('wallter').builder
 
 const server = restify.createServer({ name: 'myapp', version: '1.0.0'});
-const builder = new Builder({uuid: true, model: mongoose.model('TestModel')})
+
+const builder = new Builder({
+  uuid: true,
+  model: mongoose.model('TestModel'),
+  templates: {
+    unique: `Expecting unique value in '%1$s' field. (Model: %2$s, Field: %3$s)`
+  }
+})
 
 server.use(restify.plugins.acceptParser(server.acceptable))
 server.use(restify.plugins.queryParser())
@@ -53,6 +60,10 @@ server.post('/test', function (req, res, next) {
     return next()
   })
 })
+
+server.listen(8080, function () {
+  console.log('%s listening at %s', server.name, server.url);
+})
 ```
 
 ## Builder - Validation Schema Manipulator
@@ -70,6 +81,6 @@ See [basic tests](https://github.com/edgracilla/wallter/blob/master/test/builder
 # Error Messages
 *(more infos to come on this section)*
 ## Printing
-It uses [alexei/sprintf.js](https://github.com/alexei/sprintf.js) *(`vsprintf` specifically)* as an underlying mechanism to pass values to print.
+It uses [alexei/sprintf.js](https://github.com/alexei/sprintf.js) *(`vsprintf` specifically)* as an underlying mechanism to pass values to error messages/templates.
 
 ## Template
