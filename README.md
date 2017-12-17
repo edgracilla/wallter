@@ -79,8 +79,10 @@ See [basic tests](https://github.com/edgracilla/wallter/blob/master/test/builder
 - unstrict() - setting array of objects as optional even if object prop inside is required
 
 # Error Messages
-*(more infos to come on this section)*
+*(more infos to come in this section)*
 ## Printing
 It uses [alexei/sprintf.js](https://github.com/alexei/sprintf.js) *(`vsprintf` specifically)* as an underlying mechanism to pass values to error messages/templates.
 
 ## Template
+
+## Custom Validator - params & err messages
