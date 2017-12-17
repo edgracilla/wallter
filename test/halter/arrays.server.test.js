@@ -1,19 +1,72 @@
-/* global describe it before after */
 'use strict'
 
+const _ = require('lodash')
 const axios = require('axios')
+const restify = require('restify')
+const BPromise = require('bluebird')
+const mongoose = require('mongoose')
+
+const halter = require('../../index').halter
+const Builder = require('../../index').builder
+
+require('../models/complex.model')()
+
+let server
+let conf = {}
+let host = 'http://localhost:8080'
+
+let builder = new Builder({
+  uuid: true,
+  model: mongoose.model('ComplexModel'),
+  templates: {
+    // overwrite or add message templates (see templates/messges.json)
+    contains: `Value for field '%1$s' should contain '%2$s'.`,
+    equals: `Value for field '%1$s' should equal to '%2$s'.`,
+  }
+})
 
 describe('Server Test', function () {
-  let host = 'http://localhost:8080'
-  let conf = {}
-
   before('init', function (done) {
-    require('./server')
-    done()
+    let schema = builder
+      .select('arr1d.*')
+      .select('arr2d.*.*')
+      .select('arr3d.*.*.*')
+      .select('arr4d.*.*.*.*')
+      .select('arr1dObj1.*.foo')
+      .select('arr1dObj2.*.foo.bar')
+      .select('arr1dObj3.*.foo.bar.beer')
+      .select('arr2dObj1.*.*.foo')
+      .select('arr2dObj2.*.*.foo.bar')
+      .select('arrNest1.*.*.foo.bar.*.*')
+      .select('arrNest2.*.foo.*.bar.*.beer.*')
+      .build()
+
+    server = restify.createServer({ name: 'myapp', version: '1.0.0'});
+    server.use(restify.plugins.acceptParser(server.acceptable))
+    server.use(restify.plugins.queryParser())
+    server.use(restify.plugins.bodyParser())
+    server.use(halter())
+
+    server.post('/arr-test', function (req, res, next) {
+      if (!_.isEmpty(schema)) {
+        req.halt(schema).then(result => {
+          res.send(result)
+          return next()
+        })
+      } else {
+        res.send([])
+        return next()
+      }
+    })
+    
+    server.listen(8080, function () {
+      done()
+    })
   })
 
   after('terminate', function () {
     setTimeout(() => {
+      server.cose()
       process.exit(1)
     }, 300)
   })
@@ -21,12 +74,6 @@ describe('Server Test', function () {
   describe('# hot testing', function () {
     it('should ok', function (done) {
       let data = {
-        // _id: '2218f0ad-c5e3-50dc-afcc-26325fd77398',
-        // obj: {
-        //   foo: 'foo'
-        // },
-        
-
         arr1d: [
           'a', 'b', 'c', {x: 'x'}, 'd'
         ],
@@ -81,8 +128,8 @@ describe('Server Test', function () {
           {foo: {bar: 'b'}}
         ],
         arr1dObj3: [
-          {foo: {bar: {nar: 'aa'}}},
-          {foo: {bar: {nar: 'bb', x: 'x'}}}
+          {foo: {bar: {beer: 'aa'}}},
+          {foo: {bar: {beer: 'bb', x: 'x'}}}
         ],
 
         arr2dObj1: [
@@ -112,14 +159,14 @@ describe('Server Test', function () {
             foo: [
               {
                 bar: [
-                  {nar: ['a', 'b']},
-                  {nar: ['c', 'd', 'dd']}
+                  {beer: ['a', 'b']},
+                  {beer: ['c', 'd', 'dd']}
                 ]
               },
               {
                 bar: [
-                  {nar: ['e', 'f', 'ff']},
-                  {nar: ['g', 'h']}
+                  {beer: ['e', 'f', 'ff']},
+                  {beer: ['g', 'h']}
                 ]
               }
             ]
@@ -128,27 +175,25 @@ describe('Server Test', function () {
             foo: [
               {
                 bar: [
-                  {nar: ['i', 'j', {x: 'x'}]},
-                  {nar: ['k', 'l']}
+                  {beer: ['i', 'j', {x: 'x'}]},
+                  {beer: ['k', 'l']}
                 ]
               },
               {
                 bar: [
-                  {nar: ['m', 'n']},
-                  {nar: ['o', 'p']}
+                  {beer: ['m', 'n']},
+                  {beer: ['o', 'p']}
                 ]
               }
             ]
           },
         ],
       }
-
-      axios.post(`${host}/hot-test`, data, conf).then(ret => {
-        if (ret.status === 200 && Array.isArray(ret.data)) {
-          console.log(ret.data)
-          // done()
+      
+      axios.post(`${host}/arr-test`, data, conf).then(ret => {
+        if (ret.status === 200 && Array.isArray(ret.data) && _.isEmpty(ret.data)) {
+          done()
         }
-        done()
       }).catch(console.log)
     })
   })
