@@ -68,15 +68,18 @@ server.listen(8080, function () {
 
 ## Builder - Validation Schema Manipulator
 See [basic tests](https://github.com/edgracilla/wallter/blob/master/test/builder/basic.test.js) for an in depth usage and samples.
-- select(*String|Array*) - get specific field validation schema
-- exclude(*String|Array*)) - remove specific field validation schema
-- location() - add location on where to check *(currently supported 'location params', 'query', 'body')*
-- pickByLoc() - pick/select by location
-- addRule() - add to existing field rules
-- addRule() - add to existing or create new field rule
-- addRules() - multilple addRule()
-- fresh() - produce an empty schema (ignoring mongoose model)
-- unstrict() - setting array of objects as optional even if object prop inside is required
+
+Function                        | Description
+------------------------------- | --------------------------------------
+**select(*fieldPath*)**     | Get specific field validation schema. Can accept string or array of strings.
+**exclude(*fieldPath*)**     | Remove specific field validation schema. Can accept string or array of strings.
+**location(*loc*)**          | Add location on where to pull the data *(currently supported location 'params', 'query', 'body')*
+**pickByLoc(*option*)**         | Alternative for `location()` to support multi location selection. <br><br>option: `{location: [fieldPath, ...], ...}`<br>e.g. `{query: ['_id'], body: ['foo.bar', 'arr.*.foo.bar']}` 
+**addRule()**                   | add to existing field rules
+**addRule()**                   | add to existing or create new field rule
+**addRules()**                  | multilple addRule()
+**fresh()**                     | produce an empty schema (ignoring mongoose model)
+**unstrict()**                  | setting array of objects as optional even if object prop inside is required
 
 # Error Messages
 *(more infos to come in this section)*
