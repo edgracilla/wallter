@@ -66,7 +66,17 @@ server.listen(8080, function () {
 })
 ```
 
-## Builder - Validation Schema Manipulator
+# Builder
+## Options
+
+Option        | Description
+------------- | -------------------
+uuid          | force to add validation `isUUID()` to fields `_id` and `ref`. *Default: false* 
+uuidVersion   | Version to use once `uuid` is enabled. *Default: 5*
+model         | Mongoose object model to parse to generate validation schema.
+templates     | Error message templates for your custom validator *(see section below for [Error Messages](https://github.com/edgracilla/wallter/blob/master/README.md#error-messages))*.
+
+## Validation Schema Manipulator
 See [basic tests](https://github.com/edgracilla/wallter/blob/master/test/builder/basic.test.js) for an in depth usage and samples.
 
 Methods                                        | Description
@@ -82,10 +92,20 @@ Methods                                        | Description
 **build()**                                     | Generate schema.
 
 # Error Messages
-*(more infos to come in this section)*
-## Printing
-It uses [alexei/sprintf.js](https://github.com/alexei/sprintf.js) *(`vsprintf` specifically)* as an underlying mechanism to pass values to error messages/templates.
+By default, error messages to *some* validators are templated (see it [here](https://github.com/edgracilla/wallter/blob/master/template/messages.json)), but you can specify your own message by passing your error message template to our builder options.
 
-## Template
+It uses [sprintf.js](https://github.com/alexei/sprintf.js) *(`vsprintf` specifically)* as an underlying mechanism to pass values to error messages/templates.
 
-## Custom Validator - params & err messages
+```js
+let options = {
+  uuid: true,
+  model: mongoose.model('BasicModel'),
+  templates: {
+    unique: `Expecting unique value in '%1$s' field.`,
+    yourValidator: `Your message here, you can pass param values using sprintf.js syntax`
+  }
+}
+```
+
+### Printing param values
+In `addRule()` the 3rd array param `options` handles all values that you want to attach to your error message, but there is a numbering scheme. By default, I attached the `path` as the first item of the `options` array, the 2nd and succeeding will be the options to pass to validator options if needed.  *Check [sprintf.js](https://github.com/alexei/sprintf.js#usage) or these [tests](https://github.com/edgracilla/wallter/tree/master/test) for an in depth usage*.
