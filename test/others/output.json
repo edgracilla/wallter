@@ -1,0 +1,123 @@
+{
+  "_id": {
+    "isUUID": {
+      "msg": "Value for field '_id' must be a valid UUIDv5",
+      "options": [
+        5
+      ]
+    },
+    "required": {
+      "msg": "Value for field '_id' is required"
+    }
+  },
+  "unique": {
+    "unique": {
+      "msg": "Expecting unique value in 'unique' field.",
+      "options": [
+        "BasicModel",
+        "unique"
+      ]
+    },
+    "required": {
+      "msg": "Value for field 'unique' is required"
+    }
+  },
+  "email": {
+    "isEmail": {
+      "msg": "Value for field 'email' must be a valid email address"
+    },
+    "required": {
+      "msg": "Value for field 'email' is required"
+    }
+  },
+  "minlen": {
+    "optional": true,
+    "minlength": {
+      "msg": "Value for field 'minlen' must be atleast in 10 character(s).",
+      "options": [
+        {
+          "min": 10
+        },
+        10
+      ]
+    }
+  },
+  "maxlen": {
+    "optional": true,
+    "maxlength": {
+      "msg": "Value for field 'maxlen' must not exceed in 50 character(s).",
+      "options": [
+        {
+          "max": 50
+        },
+        50
+      ]
+    }
+  },
+  "islen": {
+    "optional": true,
+    "isLength": {
+      "msg": "Value for field 'islen' must have a minimum length of 10 and maximum length of 50 characters",
+      "options": [
+        {
+          "min": 10,
+          "max": 50
+        },
+        10,
+        50
+      ]
+    }
+  },
+  "enums": {
+    "required": {
+      "msg": "Value for field 'enums' is required"
+    },
+    "matches": {
+      "msg": "Can't find match value on enum field 'enums'. Expecting 'jane, jean, jhon'",
+      "options": [
+        "^(jane|jean|jhon)$",
+        "jane, jean, jhon"
+      ]
+    }
+  },
+  "arr.*": {
+    "required": {
+      "msg": "Value for field 'arr.*' is required"
+    }
+  },
+  "obj.foo": {
+    "required": {
+      "msg": "Value for field 'obj.foo' is required"
+    }
+  },
+  "obj.bar": {
+    "required": {
+      "msg": "Value for field 'obj.bar' is required"
+    }
+  },
+  "arrArr.*.*": {
+    "required": {
+      "msg": "Value for field 'arrArr.*.*' is required"
+    }
+  },
+  "arrObjArr.*.foo.*": {
+    "required": {
+      "msg": "Value for field 'arrObjArr.*.foo.*' is required"
+    }
+  },
+  "arrArrObj.*.*.foo": {
+    "required": {
+      "msg": "Value for field 'arrArrObj.*.*.foo' is required"
+    }
+  },
+  "arrObjArrObj.*.foo.*.bar": {
+    "required": {
+      "msg": "Value for field 'arrObjArrObj.*.foo.*.bar' is required"
+    }
+  },
+  "arrObjArrObj.*.boo.*.beer": {
+    "required": {
+      "msg": "Value for field 'arrObjArrObj.*.boo.*.beer' is required"
+    }
+  }
+}

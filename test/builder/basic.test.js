@@ -33,7 +33,7 @@ describe('Basic model build test', function () {
 
     try {
       schema = builder.build()
-      // console.log(schema)
+      console.log(JSON.stringify(schema))
       done()
     } catch (err) {
       done(err)
@@ -219,11 +219,16 @@ describe('Basic model build test', function () {
         // console.log(schema)
 
         // -- output:
-        // { email: 
+        // { email:
         //   { isEmail: { msg: 'Value for field \'email\' must be a valid email address' },
         //     required: { msg: 'Value for field \'email\' is required' },
-        //     unique: { msg: 'Expecting unique value in \'email\' field.' } },
-        //  'not.in.mongoose.schema': { isUUID: { msg: 'Value for field \'not.in.mongoose.schema\' must be a valid UUIDv4' } } }
+        //     unique:
+        //      { msg: 'Expecting unique value in \'email\' field.',
+        //        options: [Object] } },
+        //  'not.in.mongoose.schema':
+        //   { isUUID:
+        //      { msg: 'Value for field \'not.in.mongoose.schema\' must be a valid UUIDv4',
+        //        options: [Object] } } }
 
       if (_.keys(schema.email).length === 3 && _.keys(schema).length === 2) done()
     })
