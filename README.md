@@ -81,6 +81,24 @@ templates     | Error message templates for your custom validator *(see section 
 ### Validation Schema Generator *(Mongoose specific)*
 The messy problems arrives if you have multiple REST `resource` and you need to write validation schema in each resource, or clever way is to reuse some of them if possible. But still it is messy. So why not use a validation schema generator from a defined mongoose model?
 
+```js
+const Builder = require('wallter').builder
+
+const builder = new Builder({
+  uuid: true,
+  model: mongoose.model('TestModel'),
+  templates: {
+    unique: `Expecting unique value in '%1$s' field. (Model: %2$s, Field: %3$s)`
+  }
+})
+
+let schema = builder.build()
+console.log(schema)
+```
+
+[Sample Mongoose Schema](https://github.com/edgracilla/wallter/blob/master/test/models/basic.model.js)<br>
+[Sample Validation Schema - Output](https://github.com/edgracilla/wallter/blob/master/test/others/output.json)
+
 ### Validation Schema Manipulator
 See [basic tests](https://github.com/edgracilla/wallter/blob/master/test/builder/basic.test.js) for an in depth usage and samples.
 
