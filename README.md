@@ -1,5 +1,5 @@
 # wallter
-Highly influenced by [ctavan/express-validator](https://github.com/ctavan/express-validator) and relying from [chriso/validator.js](https://github.com/chriso/validator.js), wallter does almost the same goal as validator. The edge is, it supports auto validation for arrays, nested arrays, and/or nested arrays of objects without using `customValidator` workaround. It uses the schema based method and has the ability to build a validation schema straigth from your mongoose model.
+Highly influenced by [ctavan/express-validator](https://github.com/ctavan/express-validator) and relying from [chriso/validator.js](https://github.com/chriso/validator.js), wallter does almost the same goal as validator. The edge is, it supports auto validation for arrays, nested arrays, and/or nested arrays of objects without using `customValidator` workaround. It uses the schema based method and has the ability to build a validation schema straight from your mongoose model.
 
 # Installation
 
@@ -73,7 +73,7 @@ All validator specified in [validator.js](https://github.com/chriso/validator.js
 
 Option        | Description
 ------------- | -------------------
-uuid          | force to add validation `isUUID()` to fields `_id` and `ref`. *Default: false* 
+uuid          | Force to add validation `isUUID()` to fields `_id` and `ref`. *Default: false* 
 uuidVersion   | Version to use once `uuid` is enabled. *Default: 5*
 model         | Mongoose object model to parse to generate validation schema.
 templates     | Error message templates for your custom validator *(see section below for [Error Messages](https://github.com/edgracilla/wallter/blob/master/README.md#error-messages))*.
@@ -132,3 +132,7 @@ let options = {
 
 ### Printing param values
 In `addRule()` the 3rd array param `options` handles all values that you want to attach to your error message, but there is a numbering scheme. By default, I attached the `path` as the first item of the `options` array, the 2nd and succeeding will be the options to be passed to validator options if needed.  *Check [sprintf.js](https://github.com/alexei/sprintf.js#usage) or these [tests](https://github.com/edgracilla/wallter/tree/master/test) for an in depth usage*.
+
+# License
+
+MIT License
