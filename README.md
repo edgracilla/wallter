@@ -78,7 +78,7 @@ uuidVersion   | Version to use once `uuid` is enabled. *Default: 5*
 model         | Mongoose object model to parse to generate validation schema.
 templates     | Error message templates for your custom validator *(see section below for [Error Messages](https://github.com/edgracilla/wallter/blob/master/README.md#error-messages))*.
 
-### Validation Schema Generator *(Mongoose specific)*
+### Validation Schema Generator/Builder *(Mongoose specific)*
 The messy problems arrives if you have multiple REST `resource` and you need to write validation schema in each resource, or clever way is to reuse some of them if possible. But still it is messy. So why not use a validation schema generator from a defined mongoose model?
 
 ```js
