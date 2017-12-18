@@ -75,7 +75,6 @@ Function                        | Description
 **exclude(*fieldPath*)**     | Remove specific field validation schema. Can accept string or array of strings.
 **location(*loc*)**          | Add location on where to pull the data *(currently supported location 'params', 'query', 'body')*
 **pickByLoc(*option*)**         | Alternative for `location()` to support multi location selection. <br><br>option: `{location: [fieldPath, ...], ...}`<br>e.g. `{query: ['_id'], body: ['foo.bar', 'arr.*.foo.bar']}` 
-**addRule()**                   | add to existing field rules
 **addRule()**                   | add to existing or create new field rule
 **addRules()**                  | multilple addRule()
 **fresh()**                     | produce an empty schema (ignoring mongoose model)
