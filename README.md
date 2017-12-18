@@ -65,9 +65,11 @@ server.listen(8080, function () {
   console.log('%s listening at %s', server.name, server.url);
 })
 ```
+# Validator
+All validator specified in [validator.js](https://github.com/chriso/validator.js) v9.2.0 are attached and its validator name will be used as the `rule` name in validation schema.
 
 # Builder
-## Options
+### Options
 
 Option        | Description
 ------------- | -------------------
@@ -76,7 +78,10 @@ uuidVersion   | Version to use once `uuid` is enabled. *Default: 5*
 model         | Mongoose object model to parse to generate validation schema.
 templates     | Error message templates for your custom validator *(see section below for [Error Messages](https://github.com/edgracilla/wallter/blob/master/README.md#error-messages))*.
 
-## Validation Schema Manipulator
+### Validation Schema Generator *(Mongoose specific)*
+The messy problems arrives if you have multiple REST `resource` and you need to write validation schema in each resource, or clever way is to reuse some of them if possible. But still it is messy. So why not use a validation schema generator from a defined mongoose model?
+
+### Validation Schema Manipulator
 See [basic tests](https://github.com/edgracilla/wallter/blob/master/test/builder/basic.test.js) for an in depth usage and samples.
 
 Methods                                        | Description
@@ -108,4 +113,4 @@ let options = {
 ```
 
 ### Printing param values
-In `addRule()` the 3rd array param `options` handles all values that you want to attach to your error message, but there is a numbering scheme. By default, I attached the `path` as the first item of the `options` array, the 2nd and succeeding will be the options to pass to validator options if needed.  *Check [sprintf.js](https://github.com/alexei/sprintf.js#usage) or these [tests](https://github.com/edgracilla/wallter/tree/master/test) for an in depth usage*.
+In `addRule()` the 3rd array param `options` handles all values that you want to attach to your error message, but there is a numbering scheme. By default, I attached the `path` as the first item of the `options` array, the 2nd and succeeding will be the options to be passed to validator options if needed.  *Check [sprintf.js](https://github.com/alexei/sprintf.js#usage) or these [tests](https://github.com/edgracilla/wallter/tree/master/test) for an in depth usage*.
