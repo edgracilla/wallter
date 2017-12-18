@@ -69,16 +69,17 @@ server.listen(8080, function () {
 ## Builder - Validation Schema Manipulator
 See [basic tests](https://github.com/edgracilla/wallter/blob/master/test/builder/basic.test.js) for an in depth usage and samples.
 
-Function                        | Description
-------------------------------- | --------------------------------------
-**select(*fieldPath*)**     | Get specific field validation schema. Can accept string or array of strings.
-**exclude(*fieldPath*)**     | Remove specific field validation schema. Can accept string or array of strings.
-**location(*loc*)**          | Add location on where to pull the data *(currently supported location 'params', 'query', 'body')*
-**pickByLoc(*option*)**         | Alternative for `location()` to support multi location selection. <br><br>option: `{location: [fieldPath, ...], ...}`<br>e.g. `{query: ['_id'], body: ['foo.bar', 'arr.*.foo.bar']}` 
-**addRule()**                   | add to existing or create new field rule
-**addRules()**                  | multilple addRule()
-**fresh()**                     | produce an empty schema (ignoring mongoose model)
-**unstrict()**                  | setting array of objects as optional even if object prop inside is required
+Methods                                        | Description
+----------------------------------------------- | --------------------------------------
+**select(*paths*)**                             | Get specific field from pre generated schema (if mongoose model were attached)<br><br>`@param  {(string|string[])}  paths - path to property to validate`<br>`@return {self} - returned self for chaining`
+**exclude(*paths*)**                            | Remove specific field from pre generated schema (if mongoose model were attached)<br><br>`@param  {(string|string[])}  paths - path to property to validate`<br>`@return {self} - returned self for chaining`
+**location(*loc*)**                             | Adds specific location (in each property to validate) on where to pull the data. *currently supported locations are 'params', 'query', 'body'*<br><br>`@param  {string} loc - possible values are: params|query|body`
+**pickByLoc(*options*)**                        | Alternative for `location()` to support multi location selection. <br><br>`@param  {object} options - {location: [fieldPath, ...], ...}`<br>e.g. `{query: ['_id'], body: ['foo.bar', 'arr.*.foo.bar']}` 
+**addRule(*path, rule, options, misc*)**        | Add validation rule to existing validation item or create a new validation item<br><br>`@param  {string} path - path to property to validate`<br>`@param  {string} rule - validation name, it can be from chriso/validator.js or your custom validator name<br>@param  {array} options - ordered params to pass to validator, successive array items can be used to print values in error message`<br>`@param  {object} misc - miscellaneous. used internally for aliasing mongoose rules and params`
+**addRules(*[[path, rule, options, misc]]*)**   | Multilple addRule()<br><br>`@param  {array} rules - array of addRule() params`
+**unstrict(*arrPath*)**                         | Setting array of objects as optional even if object property inside is required<br><br>`@param  {(string|string[])} arrPath - path to property`
+**fresh()**                                     | Produce an empty schema (ignoring mongoose model)
+**build()**                                     | Generate schema.
 
 # Error Messages
 *(more infos to come in this section)*
