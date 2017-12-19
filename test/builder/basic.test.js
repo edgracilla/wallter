@@ -33,7 +33,7 @@ describe('Basic model build test', function () {
 
     try {
       schema = builder.build()
-      console.log(JSON.stringify(schema))
+      // console.log(JSON.stringify(schema))
       done()
     } catch (err) {
       done(err)
@@ -158,24 +158,24 @@ describe('Basic model build test', function () {
       if(_.keys(schema).length === 5) done()
     })
 
-    it('location() - add location', function (done) {
+    it('setLocation() - add location', function (done) {
       schema = builder
         .select('_id')
-        .location('body')
+        .setLocation('body')
         .build()
 
       if (schema._id.in === 'body') done()
     })
 
-    it('pickByLoc() - pick/select by location', function (done) {
+    it('cherryPick() | pickByLoc() - set multiple location and select the defined item only', function (done) {
       schema = builder
         .select('islen')
-        .location('body')
-        .pickByLoc({query: ['_id'], params: ['minlen', 'maxlen']})
+        .setLocation('body')
+        .cherryPick({query: '_id', params: ['minlen', 'maxlen']})
         .build()
 
       // console.log(schema)
-      
+
       // -- output:
       // { _id: 
       //   { isUUID: { msg: 'Value for field \'_id\' must be a valid UUIDv5' },
@@ -194,6 +194,17 @@ describe('Basic model build test', function () {
       //     isLength: { msg: 'Value for field \'islen\' must have a minimum length of 10 and maximum length of 50 characters' },
       //     in: 'body' },
       
+      if (schema._id.in === 'query' && schema.minlen.in === 'params' && schema.islen.in === 'body') {
+        done()
+      }
+    })
+
+    it('setLocations() - set multiple location', function (done) {
+      schema = builder
+        .select('islen')
+        .setLocation('body')
+        .setLocations({query: '_id', params: ['minlen', 'maxlen']})
+        .build()
 
       if (schema._id.in === 'query' && schema.minlen.in === 'params' && schema.islen.in === 'body') {
         done()

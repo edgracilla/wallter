@@ -71,7 +71,7 @@ describe('Server Test', function () {
     }, 300)
   })
 
-  describe('# hot testing', function () {
+  describe('# process nested arrays and objects', function () {
     it('should ok', function (done) {
       let data = {
         arr1d: [
