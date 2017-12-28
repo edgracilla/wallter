@@ -110,7 +110,7 @@ Methods                                        | Description
 **setLocations(*options*)**                     | Multiple location setting. <br><br>***params:*** *options {object} - {location: [fieldPath, ...], ...}*<br>e.g. `{query: ['_id'], body: ['foo.bar', 'arr.*.foo.bar']}`
 **cherryPick(*options*)**                       | Set multiple location and select the defined items only *(aka: pickByLoc())*. <br><br>***params:*** *options {object} - {location: [fieldPath, ...], ...}*<br>e.g. `{query: ['_id'], body: ['foo.bar', 'arr.*.foo.bar']}`
 **addRule(*path, rule, options*)**              | Add validation rule to existing validation item or create a new validation item<br><br>***params:*** <br>*- path {string} - path to property to validate*<br>*- rule {string} - validation name, it can be from validator.js or your custom validator*<br>*- options {array} - ordered params to pass to validator, successive array items can be used to print values in error message*
-**addRules(*[[path, rule, options, misc]]*)**   | Multilple addRule()<br><br>***params:*** *rules {array}  - array of addRule() params*
+**addRules(*[[path, rule, options]]*)**   | Multilple addRule()<br><br>***params:*** *rules {array}  - array of addRule() params*
 **unstrict(*arrPath*)**                         | Setting array of objects as optional even if object property inside is required<br><br>***params:*** *arrPath {(string\|string[])} - path to property*
 **fresh()**                                     | Produce an empty schema (ignoring mongoose model)
 **build()**                                     | Generate schema.
