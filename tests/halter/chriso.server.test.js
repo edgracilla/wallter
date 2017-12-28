@@ -48,7 +48,7 @@ let chrisoRules = [
   ['field_isInt', 'isInt', [{min: 0, max: 99}]],
   ['field_isJSON', 'isJSON'],
   ['field_isLatLong', 'isLatLong'],
-  ['field_isLength', 'isLength', [{min: 1, max: 99}, 1, 99]], // 2nd & 3rd item are for printing (see templates/messges.json)
+  ['field_isLength', 'isLength', [{min: 1, max: 99}]],
   ['field_isLowercase', 'isLowercase'],
   ['field_isMACAddress', 'isMACAddress'],
   ['field_isMD5', 'isMD5'],

@@ -32,25 +32,23 @@
   },
   "minlen": {
     "optional": true,
-    "minlength": {
+    "isLength": {
       "msg": "Value for field 'minlen' must be atleast in 10 character(s).",
       "options": [
         {
           "min": 10
-        },
-        10
+        }
       ]
     }
   },
   "maxlen": {
     "optional": true,
-    "maxlength": {
+    "isLength": {
       "msg": "Value for field 'maxlen' must not exceed in 50 character(s).",
       "options": [
         {
           "max": 50
-        },
-        50
+        }
       ]
     }
   },
@@ -62,9 +60,7 @@
         {
           "min": 10,
           "max": 50
-        },
-        10,
-        50
+        }
       ]
     }
   },
@@ -76,6 +72,7 @@
       "msg": "Can't find match value on enum field 'enums'. Expecting 'jane, jean, jhon'",
       "options": [
         "^(jane|jean|jhon)$",
+        "i",
         "jane, jean, jhon"
       ]
     }
