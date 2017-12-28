@@ -1,6 +1,6 @@
 {
   "name": "wallter",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Wallter is an express and restify middleware validator that uses validator.js and has the ability to build a validation schema straight from your mongoose model. It can dig up to the deepest defined array and/or array of objects and validate the data.",
   "main": "index.js",
   "directories": {
@@ -39,5 +39,13 @@
   "bugs": {
     "url": "https://github.com/edgracilla/wallter/issues"
   },
-  "homepage": "https://github.com/edgracilla/wallter#readme"
+  "homepage": "https://github.com/edgracilla/wallter#readme",
+  "keywords": [
+    "validate",
+    "validator",
+    "validation",
+    "express",
+    "restify",
+    "mongoose"
+  ]
 }

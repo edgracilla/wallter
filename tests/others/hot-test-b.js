@@ -38,12 +38,25 @@ describe('Basic model build test', function () {
 
   describe('hot test', function () {
     it('should be ok', function (done) {
-      console.log(JSON.stringify(builder
-        .addRule('q', 'isLength', [{max: 30}])
-        // .addRule('q', 'required')
-        .select('q')
+      let extraRules = [
+        ['upvotes.*', 'isUUID'],
+        ['downvotes.*', 'isUUID']
+      ]
+
+      let xx = builder
+        .addRules(extraRules)
+        .select(['upvotes.*', 'downvotes.*'])
         .build()
-      ))
+
+      console.log(JSON.stringify(xx))
+
+      // console.log(builder
+      //   .fresh()
+      //   .addRule('q', 'isLength', [{max: 30}])
+      //   // .addRule('q', 'required')
+      //   // .select('q')
+      //   .build()
+      // )
 
       done()
     })
