@@ -84,7 +84,7 @@ describe('Basic model build test', function () {
     })
 
     it('minlen - minlength', function (done) {
-      if (/minlen.*must be atleast/.test(schema.minlen.minlength.msg)) {
+      if (/minlen.*must be atleast/.test(schema.minlen.isLength.msg)) {
         done()
       }
     })
@@ -96,7 +96,7 @@ describe('Basic model build test', function () {
     })
 
     it('maxlen - maxlength', function (done) {
-      if (/maxlen.*must not exceed/.test(schema.maxlen.maxlength.msg)) {
+      if (/maxlen.*must not exceed/.test(schema.maxlen.isLength.msg)) {
         done()
       }
     })
