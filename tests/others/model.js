@@ -28,7 +28,7 @@ module.exports = () => {
       },
       minmaxlength: {
         type: String,
-        maxlength: 2,
+        minlength: 2,
         maxlength: 5,
         required: true
       },
@@ -61,7 +61,7 @@ module.exports = () => {
         bar: {
           type: String,
           required: true
-        },
+        }
       },
       arrObj: [{
         foo: {
@@ -108,7 +108,7 @@ module.exports = () => {
           bar: {
             beer: {
               type: String,
-            required: true
+              required: true
             }
           }
         }],
@@ -155,7 +155,7 @@ module.exports = () => {
         foo: new Schema({
           foo: {
             type: String,
-            required: true,
+            required: true
           },
           bar: {
             type: String,
@@ -205,7 +205,7 @@ module.exports = () => {
         foo: {
           bar: {
             type: String,
-            required: true,
+            required: true
             // minlength: 5,
           }
         }
@@ -231,14 +231,14 @@ module.exports = () => {
       }]],
       arrNest2: [{
         foo: [{
-          bar:  [{
+          bar: [{
             nar: [{
               type: String,
               required: true
             }]
-          }],
+          }]
         }]
-      }],
+      }]
     })
 
     mongoose.model(`TestModel`, schema, 'testmodel')

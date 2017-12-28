@@ -9,13 +9,16 @@ require('./model')()
 const halter = require('../index').halter
 const Builder = require('../index').builder
 
-const server = restify.createServer({ name: 'myapp', version: '1.0.0'});
+const server = restify.createServer({
+  name: 'myapp',
+  version: '1.0.0'
+})
 
 let builder = new Builder({
   uuid: true,
   model: mongoose.model('TestModel'),
   templates: {
-    unique: `Expecting unique value in '%1$s' field. %2$s, %3$s`,
+    unique: `Expecting unique value in '%1$s' field. %2$s, %3$s`
   }
 })
 
@@ -26,9 +29,9 @@ server.use(restify.plugins.bodyParser())
 server.use(halter({
   customValidators: {
     unique: (value, modelName, field) => {
-      return new BPromise((resolve, reject) => {
+      return new BPromise(resolve => {
         return setTimeout(() => {
-          // console.log('[executing promise custom validator (unique)]', value, modelName, field)
+          console.log('[executing promise custom validator (unique)]', value, modelName, field)
           resolve()
         }, 500)
       })
@@ -38,7 +41,7 @@ server.use(halter({
 
 console.log(builder.select('email').build())
 
-server.post('/hot-test', function (req, res, next) {
+server.post('/hot-test', (req, res, next) => {
   let schema = builder
     // .select(['_id', 'obj.foo' ])
 
@@ -78,7 +81,7 @@ server.post('/hot-test', function (req, res, next) {
   }
 })
 
-server.post('/noloc/:field', function (req, res, next) {
+server.post('/noloc/:field', (req, res, next) => {
   let schema = builder
     .select(req.params.field)
     .build()
@@ -94,7 +97,7 @@ server.post('/noloc/:field', function (req, res, next) {
   }
 })
 
-server.post('/nolocall', function (req, res, next) {
+server.post('/nolocall', (req, res, next) => {
   let schema = builder
     .build()
 
@@ -109,7 +112,7 @@ server.post('/nolocall', function (req, res, next) {
   }
 })
 
-server.post('/body', function (req, res, next) {
+server.post('/body', (req, res, next) => {
   let schema = builder
     .location('body')
     .build()
@@ -125,7 +128,7 @@ server.post('/body', function (req, res, next) {
   }
 })
 
-server.post('/query', function (req, res, next) {
+server.post('/query', (req, res, next) => {
   let schema = builder
     .location('query')
     .build()
@@ -141,7 +144,7 @@ server.post('/query', function (req, res, next) {
   }
 })
 
-server.post('/params', function (req, res, next) {
+server.post('/params', (req, res, next) => {
   let schema = builder
     .location('params')
     .build()
@@ -157,6 +160,6 @@ server.post('/params', function (req, res, next) {
   }
 })
 
-server.listen(8080, function () {
+server.listen(8080, () => {
   // console.log('%s listening at %s', server.name, server.url);
-});
+})

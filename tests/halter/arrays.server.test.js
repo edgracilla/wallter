@@ -1,9 +1,9 @@
+/* global describe, it, after, before */
 'use strict'
 
 const _ = require('lodash')
 const axios = require('axios')
 const restify = require('restify')
-const BPromise = require('bluebird')
 const mongoose = require('mongoose')
 
 const halter = require('../../index').halter
@@ -13,7 +13,7 @@ require('../models/complex.model')()
 
 let server
 let conf = {}
-let host = 'http://localhost:8080'
+let host = 'http://localhost:8787'
 
 let builder = new Builder({
   uuid: true,
@@ -21,7 +21,7 @@ let builder = new Builder({
   templates: {
     // overwrite or add message templates (see templates/messges.json)
     contains: `Value for field '%1$s' should contain '%2$s'.`,
-    equals: `Value for field '%1$s' should equal to '%2$s'.`,
+    equals: `Value for field '%1$s' should equal to '%2$s'.`
   }
 })
 
@@ -41,7 +41,7 @@ describe('Server Test', function () {
       .select('arrNest2.*.foo.*.bar.*.beer.*')
       .build()
 
-    server = restify.createServer({ name: 'myapp', version: '1.0.0'});
+    server = restify.createServer({name: 'myapp', version: '1.0.0'})
     server.use(restify.plugins.acceptParser(server.acceptable))
     server.use(restify.plugins.queryParser())
     server.use(restify.plugins.bodyParser())
@@ -58,15 +58,15 @@ describe('Server Test', function () {
         return next()
       }
     })
-    
-    server.listen(8080, function () {
+
+    server.listen(8787, function () {
       done()
     })
   })
 
   after('terminate', function () {
     setTimeout(() => {
-      server.cose()
+      server.close()
       process.exit(1)
     }, 300)
   })
@@ -78,9 +78,9 @@ describe('Server Test', function () {
           'a', 'b', 'c', {x: 'x'}, 'd'
         ],
         arr2d: [
-          ['a', 'b'], 
+          ['a', 'b'],
           ['c', 'd', {x: 'x'}],
-          ['e', 'f','g']
+          ['e', 'f', 'g']
         ],
         arr3d: [
           [
@@ -90,8 +90,8 @@ describe('Server Test', function () {
           ],
           [
             ['e', 'f'],
-            ['g', 'h', {x: 'x'}],
-          ],
+            ['g', 'h', {x: 'x'}]
+          ]
         ],
         arr4d: [
           [
@@ -102,8 +102,8 @@ describe('Server Test', function () {
             ],
             [
               ['e', 'f'],
-              ['g', 'h', {x: 'x'}],
-            ],
+              ['g', 'h', {x: 'x'}]
+            ]
           ],
           [
             [
@@ -113,13 +113,13 @@ describe('Server Test', function () {
             ],
             [
               ['ee', 'ff'],
-              ['gg', 'hh', {xx: 'xx'}],
-            ],
-          ],
+              ['gg', 'hh', {xx: 'xx'}]
+            ]
+          ]
         ],
 
         arr1dObj1: [
-          {foo: 'a'}, 
+          {foo: 'a'},
           {foo: 'b'},
           {foo: 'c'}
         ],
@@ -144,7 +144,7 @@ describe('Server Test', function () {
           [
             {foo: {bar: 'aa'}},
             {foo: {bar: 'bb'}}
-          ],
+          ]
         ],
 
         arrNest1: [
@@ -152,7 +152,7 @@ describe('Server Test', function () {
             {foo: {bar: [['a', 'b'], ['c', 'd']]}},
             {foo: {bar: [['e', 'f'], ['g', 'h']]}}
           ],
-          [{foo: {bar: [['i', 'j'], ['k', 'l']]}}],
+          [{foo: {bar: [['i', 'j'], ['k', 'l']]}}]
         ],
         arrNest2: [
           {
@@ -186,10 +186,10 @@ describe('Server Test', function () {
                 ]
               }
             ]
-          },
-        ],
+          }
+        ]
       }
-      
+
       axios.post(`${host}/arr-test`, data, conf).then(ret => {
         if (ret.status === 200 && Array.isArray(ret.data) && _.isEmpty(ret.data)) {
           done()
@@ -198,4 +198,3 @@ describe('Server Test', function () {
     })
   })
 })
-

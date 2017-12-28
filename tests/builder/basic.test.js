@@ -1,4 +1,4 @@
-/* global describe it before after */
+/* global describe, it, after, before */
 'use strict'
 
 require('../models/basic.model')()
@@ -70,7 +70,7 @@ describe('Basic model build test', function () {
         done()
       }
     })
-  
+
     it('email - required', function (done) {
       if (/email.*is required/.test(schema.email.required.msg)) {
         done()
@@ -137,7 +137,7 @@ describe('Basic model build test', function () {
         .select('enums')
         .build()
 
-      if(_.keys(schema).length === 2) done()
+      if (_.keys(schema).length === 2) done()
     })
 
     it('select() - array', function (done) {
@@ -145,7 +145,7 @@ describe('Basic model build test', function () {
         .select(['_id', 'enums'])
         .build()
 
-      if(_.keys(schema).length === 2) done()
+      if (_.keys(schema).length === 2) done()
     })
 
     it('exclude() - string/array', function (done) {
@@ -155,7 +155,7 @@ describe('Basic model build test', function () {
         .exclude(nestedFields) // can feed array
         .build()
 
-      if(_.keys(schema).length === 5) done()
+      if (_.keys(schema).length === 5) done()
     })
 
     it('setLocation() - add location', function (done) {
@@ -177,23 +177,23 @@ describe('Basic model build test', function () {
       // console.log(schema)
 
       // -- output:
-      // { _id: 
+      // { _id:
       //   { isUUID: { msg: 'Value for field \'_id\' must be a valid UUIDv5' },
       //     required: { msg: 'Value for field \'_id\' is required' },
       //     in: 'query' },
-      //   minlen: 
+      //   minlen:
       //   { optional: true,
       //     minlength: { msg: 'Value for field \'minlen\' must be atleast in 10 character(s).' },
       //     in: 'params' },
-      //   maxlen: 
+      //   maxlen:
       //   { optional: true,
       //     maxlength: { msg: 'Value for field \'maxlen\' must not exceed in 50 character(s).' },
       //     in: 'params' } },
-      //   islen: 
+      //   islen:
       //   { optional: true,
       //     isLength: { msg: 'Value for field \'islen\' must have a minimum length of 10 and maximum length of 50 characters' },
       //     in: 'body' },
-      
+
       if (schema._id.in === 'query' && schema.minlen.in === 'params' && schema.islen.in === 'body') {
         done()
       }
@@ -280,7 +280,6 @@ describe('Basic model build test', function () {
       // { 'arrObjArrObj.*.foo.*.bar': { required: { msg: 'Value for field \'arrObjArrObj.*.foo.*.bar\' is required' } },
       //   'arrObjArrObj.*.boo.*.beer': { required: { msg: 'Value for field \'arrObjArrObj.*.boo.*.beer\' is required' } },
       //   'arrObjArrObj.*': { optional: true } }
-
 
       if (_.keys(schema).length === 3) done()
     })

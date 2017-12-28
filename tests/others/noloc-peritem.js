@@ -1,4 +1,4 @@
-/* global describe it before after */
+/* global describe, it, after, before */
 'use strict'
 
 const axios = require('axios')
@@ -82,7 +82,7 @@ describe('Server Test', function () {
     })
 
     it('should halt maxlength - exceeded chars', function (done) {
-      axios.post(`${host}/noloc/maxlength`, {maxlength:'thebigbrownfoxjumpsoverthelazydog'}, conf).then(ret => {
+      axios.post(`${host}/noloc/maxlength`, {maxlength: 'thebigbrownfoxjumpsoverthelazydog'}, conf).then(ret => {
         if (ret.status === 200 && Array.isArray(ret.data)) {
           let cond1 = false
 
@@ -126,7 +126,7 @@ describe('Server Test', function () {
         }
       }).catch(console.log)
     })
-    
+
     it('should halt arrRef.*', function (done) {
       axios.post(`${host}/noloc/arrRef.*`, {}, conf).then(ret => {
         if (ret.status === 200 && Array.isArray(ret.data)) {
@@ -312,11 +312,9 @@ describe('Server Test', function () {
     })
   })
 
-
   /**
    * location (body, params, query)
    * optional/required
-   * 
+   *
    */
 })
-

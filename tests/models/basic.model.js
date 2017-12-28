@@ -50,7 +50,7 @@ module.exports = () => {
         bar: {
           type: String,
           required: true
-        },
+        }
       },
       arrArr: [[{
         type: String,
@@ -81,7 +81,7 @@ module.exports = () => {
             required: true
           }
         }]
-      }],
+      }]
     })
 
     mongoose.model(`BasicModel`, schema, 'basic-model')

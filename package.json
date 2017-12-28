@@ -4,10 +4,19 @@
   "description": "Wallter is an express and restify middleware validator that uses validator.js and has the ability to build a validation schema straight from your mongoose model. It can dig up to the deepest defined array and/or array of objects and validate the data.",
   "main": "index.js",
   "directories": {
-    "test": "test"
+    "test": "tests"
   },
   "devDependencies": {
     "axios": "^0.17.1",
+    "gulp": "^3.9.1",
+    "gulp-env": "^0.4.0",
+    "gulp-jshint": "^2.0.4",
+    "gulp-json-lint": "^0.1.0",
+    "gulp-mocha": "^4.3.1",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-standard": "^10.1.1",
+    "jshint": "^2.9.5",
     "mocha": "^4.0.1",
     "mongoose": "^4.13.6",
     "restify": "^6.3.4",
@@ -19,7 +28,7 @@
     "validator": "^9.1.2"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",

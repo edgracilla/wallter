@@ -19,10 +19,10 @@ module.exports.halter = (options) => {
       return halter.check(schema, {
         body: req.body,
         query: req.query,
-        params: req.params,
+        params: req.params
       })
     }
-  
+
     next()
   }
 }

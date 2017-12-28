@@ -1,16 +1,16 @@
+/* global describe, it, after, before */
 'use strict'
 
 const _ = require('lodash')
 const axios = require('axios')
 const restify = require('restify')
-const BPromise = require('bluebird')
 
 const halter = require('../../index').halter
 const Builder = require('../../index').builder
 
 let server
 let conf = {}
-let host = 'http://localhost:8080'
+let host = 'http://localhost:8686'
 
 let chrisoRules = [
   ['field_contains', 'contains', ['seed']],
@@ -22,13 +22,13 @@ let chrisoRules = [
   ['field_isBase64', 'isBase64'],
   ['field_isBefore', 'isBefore', ['12/12/12']],
   ['field_isBoolean', 'isBoolean'],
-  ['field_isByteLength', 'isByteLength', [{min:0, max: 10}]],
+  ['field_isByteLength', 'isByteLength', [{min: 0, max: 10}]],
   ['field_isCreditCard', 'isCreditCard'],
   ['field_isCurrency', 'isCurrency', [{symbol: '$'}]],
   ['field_isDataURI', 'isDataURI'],
   ['field_isDecimal', 'isDecimal', [{locale: 'en-US'}]],
   ['field_isDivisibleBy', 'isDivisibleBy', [3]],
-  ['field_isEmail', 'isEmail', [{ allow_display_name: false}]],
+  ['field_isEmail', 'isEmail', [{allow_display_name: false}]],
   ['field_isEmpty', 'isEmpty'],
   ['field_isFQDN', 'isFQDN', [{allow_underscores: false}]],
   ['field_isFloat', 'isFloat', ['en-US']],
@@ -44,7 +44,7 @@ let chrisoRules = [
   ['field_isISO8601', 'isISO8601'],
   ['field_isISO31661Alpha2', 'isISO31661Alpha2'],
   ['field_isISRC', 'isISRC'],
-  ['field_isIn', 'isIn', [['array','of','allowed','values']]],
+  ['field_isIn', 'isIn', [['array', 'of', 'allowed', 'values']]],
   ['field_isInt', 'isInt', [{min: 0, max: 99}]],
   ['field_isJSON', 'isJSON'],
   ['field_isLatLong', 'isLatLong'],
@@ -65,14 +65,14 @@ let chrisoRules = [
   ['field_isUppercase', 'isUppercase'],
   ['field_isVariableWidth', 'isVariableWidth'],
   ['field_isWhitelisted', 'isWhitelisted', ['abc']],
-  ['field_matches', 'matches', ['^(aa|bb|cc)$', /* modifiers here */, 'aa, bb, cc']]
+  ['field_matches', 'matches', ['^(aa|bb|cc)$', 'i', 'aa, bb, cc']]
 ]
 
 let builder = new Builder({
   templates: {
     // overwrite or add message templates (see templates/messges.json)
     contains: `Value for field '%1$s' should contain '%2$s'.`,
-    equals: `Value for field '%1$s' should equal to '%2$s'.`,
+    equals: `Value for field '%1$s' should equal to '%2$s'.`
   }
 })
 
@@ -82,7 +82,7 @@ describe('Server Test', function () {
       .addRules(chrisoRules)
       .build()
 
-    server = restify.createServer({ name: 'myapp', version: '1.0.0'});
+    server = restify.createServer({name: 'myapp', version: '1.0.0'})
     server.use(restify.plugins.acceptParser(server.acceptable))
     server.use(restify.plugins.queryParser())
     server.use(restify.plugins.bodyParser())
@@ -99,15 +99,15 @@ describe('Server Test', function () {
         return next()
       }
     })
-    
-    server.listen(8080, function () {
+
+    server.listen(8686, function () {
       done()
     })
   })
 
   after('terminate', function () {
     setTimeout(() => {
-      server.cose()
+      server.close()
       process.exit(1)
     }, 300)
   })
@@ -159,7 +159,7 @@ describe('Server Test', function () {
         field_isMongoId: '507f191e810c19729de860ea',
         field_isMultibyte: '¥',
         field_isNumeric: '123',
-        field_isPort: '8080',
+        field_isPort: '8686',
         field_isPostalCode: '72716',
         field_isSurrogatePair: '🀜',
         field_isURL: 'https://www.google.com',
@@ -167,7 +167,7 @@ describe('Server Test', function () {
         field_isUppercase: 'UP',
         field_isVariableWidth: 'ｔｅｓｔer',
         field_isWhitelisted: 'abc',
-        field_matches: 'aa',
+        field_matches: 'aa'
       }
 
       axios.post(`${host}/test`, data, conf).then(ret => {

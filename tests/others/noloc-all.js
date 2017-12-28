@@ -1,4 +1,4 @@
-/* global describe it before after */
+/* global describe, it, after, before */
 'use strict'
 
 const axios = require('axios')
@@ -21,7 +21,7 @@ describe('Server Test', function () {
   let isOutputOk = (results) => {
     let hasErr = []
 
-    for(var i = 0; i < 34; i++) {
+    for (var i = 0; i < 34; i++) {
       hasErr.push(false)
     }
 
@@ -54,7 +54,7 @@ describe('Server Test', function () {
       if (/arrObjArrObj\.\*\.moo\.\*\.nar.*is required/.test(item.message)) hasErr[i] = true
       if (/arrObjArrObjObj\.\*\.foo\.\*\.bar\.beer.*is required/.test(item.message)) hasErr[i] = true
       if (/arrObjArrObjObj\.\*\.fooo\.\*\.barr\.beerr.*is required/.test(item.message)) hasErr[i] = true
-      
+
       if (/schemaObj\.foo.*is required/.test(item.message)) hasErr[i] = true
       if (/schemaObj\.bar.*is required/.test(item.message)) hasErr[i] = true
       if (/schemaObjArr\.\*\.foo.*is required/.test(item.message)) hasErr[i] = true
@@ -77,7 +77,7 @@ describe('Server Test', function () {
     return !hasFalse
   }
 
-  /* describe('# no value -- all fields', function () {
+  describe('# no value -- all fields', function () {
     it('should halt all -- noloc', function (done) {
       this.timeout(5000)
 
@@ -117,7 +117,7 @@ describe('Server Test', function () {
         }
       }).catch(console.log)
     })
-  }) */
+  })
 
   describe('# with valid values -- all fields', function () {
     it('should not halt all -- noloc', function (done) {
@@ -131,8 +131,8 @@ describe('Server Test', function () {
         minmaxlength: 'foo', // !
         enums: 'jhon',
 
-        ref:  '2218f0ad-c5e3-50dc-afcc-26325fd77398',
-        arrRef: [ '2218f0ad-c5e3-50dc-afcc-26325fd77398'],
+        ref: '2218f0ad-c5e3-50dc-afcc-26325fd77398',
+        arrRef: ['2218f0ad-c5e3-50dc-afcc-26325fd77398'],
 
         arr: ['foo'],
         obj: {
@@ -143,14 +143,14 @@ describe('Server Test', function () {
           foo: 'foo',
           bar: 'bar'
         }],
-        arrArr:[['foo']],
-        arrArrObj:[[{
+        arrArr: [['foo']],
+        arrArrObj: [[{
           foo: 'foo'
         }]],
         arrObjArr: [{
           foo: ['foo']
         }],
-        
+
         arrObjArrObj: [{
           foo: [{
             bar: 'bar'
@@ -159,12 +159,12 @@ describe('Server Test', function () {
 
         schemaObj: {
           foo: 'foo',
-          bar: 'bar',
+          bar: 'bar'
         },
         schemaObjArr: [{
           foo: 'foo',
-          foo: 'bar',
-        }],
+          bar: 'bar'
+        }]
         // schemaObjArrObjArr: [{
         //   foo: ['foo'],
         //   bar: ['bar'],
@@ -181,4 +181,3 @@ describe('Server Test', function () {
     })
   })
 })
-

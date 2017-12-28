@@ -1,13 +1,11 @@
-/* global describe it before after */
+/* global describe, it, after, before */
 'use strict'
 
 require('../models/basic.model')()
 
-const _ = require('lodash')
 const mongoose = require('mongoose')
 const Builder = require('../../index').builder
 
-let schema
 let builder
 
 let options = {
@@ -23,7 +21,7 @@ describe('Basic model build test', function () {
     builder = new Builder(options)
 
     try {
-      schema = builder.build()
+      // let schema = builder.build()
       // console.log(JSON.stringify(schema))
       // console.log(schema)
       done()
@@ -40,7 +38,6 @@ describe('Basic model build test', function () {
 
   describe('hot test', function () {
     it('should be ok', function (done) {
-
       console.log(JSON.stringify(builder
         .addRule('q', 'isLength', [{max: 30}])
         // .addRule('q', 'required')

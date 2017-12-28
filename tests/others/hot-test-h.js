@@ -1,4 +1,4 @@
-/* global describe it before after */
+/* global describe, it, after, before */
 'use strict'
 
 const axios = require('axios')
@@ -24,8 +24,8 @@ describe('Server Test', function () {
         // _id: '2218f0ad-c5e3-50dc-afcc-26325fd77398',
         arrObj: [{
           foo: 'aa',
-          bar: 'bb',
-        }],
+          bar: 'bb'
+        }]
         // arrObj: []
       }
 
@@ -39,4 +39,3 @@ describe('Server Test', function () {
     })
   })
 })
-

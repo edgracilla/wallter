@@ -77,12 +77,12 @@ module.exports = () => {
       }]],
       arrNest2: [{
         foo: [{
-          bar:  [{
+          bar: [{
             beer: [{
               type: String,
               required: true
             }]
-          }],
+          }]
         }]
       }],
 
@@ -120,14 +120,14 @@ module.exports = () => {
         foo: new Schema({
           foo: {
             type: String,
-            required: true,
+            required: true
           },
           bar: {
             type: String,
             required: true
           }
         }, {_id: false})
-      }, {_id: false})],
+      }, {_id: false})]
     })
 
     mongoose.model(`ComplexModel`, schema, 'complex-model')

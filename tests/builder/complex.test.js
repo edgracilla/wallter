@@ -1,9 +1,8 @@
-/* global describe it before after */
+/* global describe, it, after, before */
 'use strict'
 
 require('../models/complex.model')()
 
-const _ = require('lodash')
 const mongoose = require('mongoose')
 const Builder = require('../../index').builder
 
@@ -47,7 +46,7 @@ describe('Complex model build test', function () {
       // console.log(schema)
 
       // -- output:
-      // { _id: 
+      // { _id:
       //   { isUUID: { msg: 'Value for field \'_id\' must be a valid UUIDv5' },
       //     required: { msg: 'Value for field \'_id\' is required' } },
       //  'arr1d.*': { required: { msg: 'Value for field \'arr1d.*\' is required' } },
