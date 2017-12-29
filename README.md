@@ -6,7 +6,7 @@ Highly influenced by [ctavan/express-validator](https://github.com/ctavan/expres
 `npm install --save wallter`
 
 # Usage
-[Sample Mongoose Model](https://github.com/edgracilla/wallter/blob/master/test/models/basic.model.js)
+[Sample Mongoose Model](https://github.com/edgracilla/wallter/blob/master/tests/models/basic.model.js)
 
 ```js
 require('./model')()
@@ -96,11 +96,11 @@ let schema = builder.build()
 console.log(schema)
 ```
 
-[Sample Mongoose Schema](https://github.com/edgracilla/wallter/blob/master/test/models/basic.model.js)<br>
-[Sample Validation Schema - Output](https://github.com/edgracilla/wallter/blob/master/test/others/output.json)
+[Sample Mongoose Schema](https://github.com/edgracilla/wallter/blob/master/tests/models/basic.model.js)<br>
+[Sample Validation Schema - Output](https://github.com/edgracilla/wallter/blob/master/tests/others/output.json)
 
 ### Validation Schema Manipulator
-See [basic tests](https://github.com/edgracilla/wallter/blob/master/test/builder/basic.test.js) for an in depth usage and samples.
+See [basic tests](https://github.com/edgracilla/wallter/blob/master/tests/builder/basic.test.js) for an in depth usage and samples.
 
 Methods                                        | Description
 ----------------------------------------------- | --------------------------------------
@@ -132,7 +132,7 @@ let options = {
 ```
 
 ### Printing param values
-In `addRule()` the 3rd array param `options` handles all values that you want to attach to your error message, but there is a numbering scheme. By default, I attached the `path` as the first item of the `options` array, the 2nd and succeeding will be the options to be passed to validator options if needed.  *Check [sprintf.js](https://github.com/alexei/sprintf.js#usage) or these [tests](https://github.com/edgracilla/wallter/tree/master/test) for an in depth usage*.
+In `addRule()` the 3rd array param `options` handles all values that you want to attach to your error message, but there is a numbering scheme. By default, I attached the `path` as the first item of the `options` array, the 2nd and succeeding will be the options to be passed to validator options if needed.  *Check [sprintf.js](https://github.com/alexei/sprintf.js#usage) or these [tests](https://github.com/edgracilla/wallter/tree/master/tests) for an in depth usage*.
 
 # License
 
