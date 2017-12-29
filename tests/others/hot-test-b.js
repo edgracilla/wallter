@@ -43,12 +43,22 @@ describe('Basic model build test', function () {
         ['downvotes.*', 'isUUID']
       ]
 
-      let xx = builder
-        .addRules(extraRules)
-        .select(['upvotes.*', 'downvotes.*'])
-        .build()
+      let v = {
+        update: builder
+          .setLocations({params: '_id'})
+          .addRules(extraRules)
+          .setLocation('body')
+          .unstrict('infos.*')
+          .build(),
 
-      console.log(JSON.stringify(xx))
+        search: builder
+          // .addRule('q', 'isLength', [{max: 50}])
+          .addRule('q', 'required')
+          .select('q')
+          .build()
+      }
+
+      console.log(v)
 
       // console.log(builder
       //   .fresh()
