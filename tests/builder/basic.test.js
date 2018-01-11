@@ -46,7 +46,7 @@ describe('Basic model build test', function () {
     }, 300)
   })
 
-  /* describe('# validators', function () {
+  describe('# validators', function () {
     it('_id - required', function (done) {
       if (/_id.*is required/.test(schema._id.required.msg)) {
         done()
@@ -128,7 +128,7 @@ describe('Basic model build test', function () {
         }
       })
     })
-  }) */
+  })
 
   describe('# schema manipulator', function () {
     it('select() - string', function (done) {
@@ -282,6 +282,15 @@ describe('Basic model build test', function () {
       //   'arrObjArrObj.*': { optional: true } }
 
       if (_.keys(schema).length === 3) done()
+    })
+
+    it('dropRule() - remove validation rule from schema item', function (done) {
+      schema = builder
+        .select('email')
+        .dropRule('email', ['unique', 'isEmail'])
+        .build()
+
+      if (Object.keys(schema).length === 1) done()
     })
   })
 })
