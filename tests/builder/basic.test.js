@@ -46,7 +46,7 @@ describe('Basic model build test', function () {
     }, 300)
   })
 
-  describe('# validators', function () {
+  /* describe('# validators', function () {
     it('_id - required', function (done) {
       if (/_id.*is required/.test(schema._id.required.msg)) {
         done()
@@ -128,7 +128,7 @@ describe('Basic model build test', function () {
         }
       })
     })
-  })
+  }) */
 
   describe('# schema manipulator', function () {
     it('select() - string', function (done) {
