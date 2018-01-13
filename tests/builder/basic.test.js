@@ -134,8 +134,10 @@ describe('Basic model build test', function () {
     it('select() - string', function (done) {
       schema = builder
         .select('_id')
-        .select('enums')
+        .select('unique')
         .build()
+
+        console.log(schema)
 
       if (_.keys(schema).length === 2) done()
     })
@@ -287,10 +289,25 @@ describe('Basic model build test', function () {
     it('dropRule() - remove validation rule from schema item', function (done) {
       schema = builder
         .select('email')
-        .dropRule('email', ['unique', 'isEmail'])
+        .dropRule('email', ['isEmail'])
         .build()
 
-      if (Object.keys(schema).length === 1) done()
+      if (Object.keys(schema.email).length === 1) done()
+    })
+
+    it('dropRule() - multi build() call bug', function (done) {
+      schema = {
+        aa: builder
+          .select('email')
+          .build(),
+
+        bb: builder
+          .dropRule('email', ['isEmail'])
+          .select('email')
+          .build(),
+      }
+
+      if (Object.keys(schema.aa.email).length === 2 && Object.keys(schema.bb.email).length === 1) done()
     })
   })
 })

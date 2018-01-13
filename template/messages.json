@@ -1,5 +1,6 @@
 {
   "unique": "Expecting unique value in '%1$s' field",
+  "isExists": "Value for field '%1$s' does not exist in database",
   "isUUID": "Value for field '%1$s' must be a valid UUIDv%2$s",
   "isEmail": "Value for field '%1$s' must be a valid email address",
   "matches": "Can't find match value on enum field '%1$s'. Expecting '%4$s'",
