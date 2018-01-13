@@ -1,5 +1,7 @@
 # wallter
-Highly influenced by [ctavan/express-validator](https://github.com/ctavan/express-validator) and relying from [chriso/validator.js](https://github.com/chriso/validator.js), wallter does almost the same goal as validator. The edge is, it supports auto validation for arrays, nested arrays, and/or nested arrays of objects without using `customValidator` workaround. It uses the schema based method and has the ability to build a validation schema straight from your mongoose model.
+Wallter is an express and restify middleware validator that uses validator.js and has the ability to build validation schema straight from your mongoose model. It can dig up to the deepest defined array and/or array of objects and validate the data.
+
+It is highly influenced by [ctavan/express-validator](https://github.com/ctavan/express-validator) and relying from [chriso/validator.js](https://github.com/chriso/validator.js), wallter does almost the same goal as validator. The edge is, it supports auto validation for arrays, nested arrays, and/or nested arrays of objects without using `customValidator` workaround.
 
 # Installation
 
