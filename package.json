@@ -1,7 +1,7 @@
 {
   "name": "wallter",
-  "version": "0.0.8",
-  "description": "Wallter is an express and restify middleware validator that uses validator.js and has the ability to build a validation schema straight from your mongoose model. It can dig up to the deepest defined array and/or array of objects and validate the data.",
+  "version": "0.0.9",
+  "description": "Wallter is an express and restify middleware validator that uses validator.js and has the ability to build validation schema straight from your mongoose model. It can dig up to the deepest defined array and/or array of objects and validate the data.",
   "main": "index.js",
   "directories": {
     "test": "tests"
