@@ -47,7 +47,8 @@ let chrisoRules = [
   ['field_isIn', 'isIn', [['array', 'of', 'allowed', 'values']]],
   ['field_isInt', 'isInt', [{min: 0, max: 99}]],
   ['field_isJSON', 'isJSON'],
-  ['field_isLatLong', 'isLatLong'],
+  ['field_isLatLong_str', 'isLatLong'],
+  ['field_isLatLong_arr', 'isLatLong'],
   ['field_isLength', 'isLength', [{min: 1, max: 99}]],
   ['field_isLowercase', 'isLowercase'],
   ['field_isMACAddress', 'isMACAddress'],
@@ -149,7 +150,8 @@ describe('Server Test', function () {
         field_isIn: 'allowed',
         field_isInt: '23',
         field_isJSON: '{"a":"b"}',
-        field_isLatLong: '45.611729,8.900090',
+        field_isLatLong_str: '45.611729,8.900090', // isLatLong asks for lat, lng format
+        field_isLatLong_arr: [179.0422, 89.1750], // mongodb geospatial asks for [lng, lat] format
         field_isLength: 'abc123',
         field_isLowercase: 'imlowercase',
         field_isMACAddress: '00:1B:44:11:3A:B7',

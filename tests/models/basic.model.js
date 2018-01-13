@@ -38,6 +38,11 @@ module.exports = () => {
         enum: ['jane', 'jean', 'jhon'],
         required: true
       },
+      coordinates: {
+        required: true,
+        type: [Number], // [<longitude>, <latitude>]
+        index: '2d'     // create the geospatial index
+      },
       arr: [{
         type: String,
         required: true

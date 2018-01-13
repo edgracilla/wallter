@@ -155,7 +155,7 @@ describe('Basic model build test', function () {
         .exclude(nestedFields) // can feed array
         .build()
 
-      if (_.keys(schema).length === 5) done()
+      if (_.keys(schema).length === 6) done()
     })
 
     it('setLocation() - add location', function (done) {

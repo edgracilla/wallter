@@ -33,7 +33,7 @@
   "isHexColor": "Value for field '%1$s' must be a valid hexadecimal color",
   "isMD5": "Value for field '%1$s' must be a valid MD5 hash",
   "isJSON": "Value for field '%1$s' must be a valid JSON",
-  "isLatLong": "Value for field '%1$s' must be a valid latitude-longitude coordinate in the format lat,long or lat, long",
+  "isLatLong": "Value for field '%1$s' must be a valid latitude-longitude coordinate in the format '[long, lat]'",
   "isEmpty": "Value for field '%1$s' must not be empty",
   "isByteLength": "Value for field '%1$s' must have a '%2$s' of '%3$s' byte lenght characters",
   "isPostalCode": "Value for field '%1$s' must be a valid postal code",
