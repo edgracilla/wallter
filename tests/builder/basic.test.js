@@ -155,7 +155,7 @@ describe('Basic model build test', function () {
         .exclude(nestedFields) // can feed array
         .build()
 
-      if (_.keys(schema).length === 6) done()
+      if (_.keys(schema).length === 7) done()
     })
 
     it('setLocation() - add location', function (done) {
@@ -302,7 +302,7 @@ describe('Basic model build test', function () {
         bb: builder
           .dropRule('email', ['isEmail'])
           .select('email')
-          .build(),
+          .build()
       }
 
       if (Object.keys(schema.aa.email).length === 2 && Object.keys(schema.bb.email).length === 1) done()
