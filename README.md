@@ -46,13 +46,13 @@ server.use(halter({
 }))
 
 server.post('/test', function (req, res, next) {
-  let schema = builder
+  let validationSchema = builder
     .location('body')
     .exclude(['arr.*.foo'])
     .addRule('email', 'unique', ['modelName', 'email']) // custom validator above
     .build()
 
-  req.halt(schema).then(result => {
+  req.halt(validationSchema).then(result => {
     if (result.length) {
       res.send(400, result)
     } else {
