@@ -43,6 +43,10 @@ module.exports = () => {
         type: [Number], // [<longitude>, <latitude>]
         index: '2d'     // create the geospatial index
       },
+      number: {
+        type: Number,
+        default: 0
+      },
       arr: [{
         type: String,
         required: true

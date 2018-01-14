@@ -134,10 +134,8 @@ describe('Basic model build test', function () {
     it('select() - string', function (done) {
       schema = builder
         .select('_id')
-        .select('unique')
+        .select('number')
         .build()
-
-        console.log(schema)
 
       if (_.keys(schema).length === 2) done()
     })
