@@ -78,7 +78,7 @@ Option        | Description
 uuid          | Force to add validation `isUUID()` to fields `_id` and `ref`. *Default: false* 
 uuidVersion   | Version to use once `uuid` is enabled. *Default: 5*
 model         | Mongoose object model to parse to generate validation schema.
-templates     | Error message templates for your custom validator *(see section below for [Error Messages](https://github.com/edgracilla/wallter/blob/master/README.md#error-messages))*.
+templates     | Error message templates object for your custom validator *(see section below for [Error Messages](https://github.com/edgracilla/wallter/blob/master/README.md#error-messages))*.
 
 ### Validation Schema Generator/Builder *(Mongoose specific)*
 The messy problems arrives if you have multiple REST `resource` and you need to write validation schema in each resource, or clever way is to reuse some of them if possible. But still it is messy. So why not use a validation schema generator from a defined mongoose model?
@@ -106,17 +106,19 @@ See [basic tests](https://github.com/edgracilla/wallter/blob/master/tests/builde
 
 Methods                                        | Description
 ----------------------------------------------- | --------------------------------------
-**select(*paths*)**                             | Get specific field from pre generated schema (if mongoose model were attached)<br><br>***params:*** *paths {(string\|string[])} - path to property to validate`*
-**exclude(*paths*)**                            | Remove specific field from pre generated schema (if mongoose model were attached)<br><br>***params:*** *paths {(string\|string[])} - path to property to validate*
-**setLocation(*loc*)**                          | Adds specific location (in each property to validate, or to the selected ones) on where to pull the data. *currently supported locations are 'params', 'query', 'body'*<br><br>***params:*** *loc {string} - possible values are: params\|query\|body*
-**setLocations(*options*)**                     | Multiple location setting. <br><br>***params:*** *options {object} - {location: [fieldPath, ...], ...}*<br>e.g. `{query: ['_id'], body: ['foo.bar', 'arr.*.foo.bar']}`
-**cherryPick(*options*)**                       | Set multiple location and select the defined items only *(aka: pickByLoc())*. <br><br>***params:*** *options {object} - {location: [fieldPath, ...], ...}*<br>e.g. `{query: ['_id'], body: ['foo.bar', 'arr.*.foo.bar']}`
 **addRule(*path, rule, options*)**              | Add validation rule to existing validation item or create a new validation item<br><br>***params:*** <br>*- path {string} - path to property to validate*<br>*- rule {string} - validation name, it can be from validator.js or your custom validator*<br>*- options {array} - ordered params to pass to validator, successive array items can be used to print values in error message*
-**addRules(*[[path, rule, options]]*)**         | Multilple addRule()<br><br>***params:*** *rules {array}  - array of addRule() params*
-**dropRule(*path, rules*)**                     | Remove validation rule from schema item<br><br>***params:*** <br>- *path {string}  - path to property to validate* <br>- *rules {string\|string[]}  - validation rule names to remove*
-**unstrict(*arrPath*)**                         | Setting array of objects as optional even if object property inside is required<br><br>***params:*** *arrPath {(string\|string[])} - path to property*
-**fresh()**                                     | Produce an empty schema (ignoring mongoose model)
+**addRules(*[[path, rule, options]]*)**         | Multilple addRule()<br><br>***param:*** *rules {array}  - array of addRule() params*
 **build()**                                     | Generate schema.
+**cherryPick(*options*)**                       | Set multiple location and select the defined items only *(aka: pickByLoc())*. <br><br>***param:*** *options {object} - {location: [fieldPath, ...], ...}*<br>e.g. `{query: ['_id'], body: ['foo.bar', 'arr.*.foo.bar']}`
+**dropRule(*path, rules*)**                     | Remove validation rule from schema item<br><br>***params:*** <br>- *path {string}  - path to property to validate* <br>- *rules {string\|string[]}  - validation rule names to remove*
+**exclude(*paths*)**                            | Remove specific field from pre generated schema (if mongoose model were attached)<br><br>***param:*** *paths {(string\|string[])} - path to property to validate*
+**fresh()**                                     | Produce an empty schema (ignoring mongoose model)
+**select(*paths*)**                             | Get specific field from pre generated schema (if mongoose model were attached)<br><br>***param:*** *paths {(string\|string[])} - path to property to validate`*
+**setLocation(*loc*)**                          | Adds specific location (in each property to validate, or to the selected ones) on where to pull the data. *currently supported locations are 'params', 'query', 'body'*<br><br>***param:*** *loc {string} - possible values are: params\|query\|body*
+**setLocations(*options*)**                     | Multiple location setting. <br><br>***param:*** *options {object} - {location: [fieldPath, ...], ...}*<br>e.g. `{query: ['_id'], body: ['foo.bar', 'arr.*.foo.bar']}`
+**setOptional(*path*)**                         | Set field to validate as optional<br><br>***param:*** *path {string}  - path to property to validate*
+**setRequired(*path*)**                         | Set field to validate as required<br><br>***param:*** *path {string}  - path to property to validate*
+**unstrict(*arrPath*)**                         | Setting array of objects as optional even if object property inside is required<br><br>***param:*** *arrPath {(string\|string[])} - path to property*
 
 # Error Messages
 By default, error messages to *some* validators are templated (see it [here](https://github.com/edgracilla/wallter/blob/master/template/messages.json)), but you can specify your own message by passing your error message template to our builder options.
