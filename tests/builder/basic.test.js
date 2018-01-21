@@ -46,7 +46,7 @@ describe('Basic model build test', function () {
     }, 300)
   })
 
-  describe('# validators', function () {
+  /* describe('# validators', function () {
     it('_id - required', function (done) {
       if (/_id.*is required/.test(schema._id.required.msg)) {
         done()
@@ -128,10 +128,10 @@ describe('Basic model build test', function () {
         }
       })
     })
-  })
+  }) */
 
   describe('# schema manipulator', function () {
-    it('select() - string', function (done) {
+    /* it('select() - string', function (done) {
       schema = builder
         .select('_id')
         .select('number')
@@ -306,6 +306,24 @@ describe('Basic model build test', function () {
       }
 
       if (Object.keys(schema.aa.email).length === 2 && Object.keys(schema.bb.email).length === 1) done()
+    })
+
+    it('setOptional() - Set field to validate as optional', function (done) {
+      schema = builder
+        .select('email')
+        .setOptional('email')
+        .build()
+
+      if (schema.email.optional && _.isNil(schema.email.required)) done()
+    }) */
+
+    it('setRequired() - Set field to validate as required', function (done) {
+      schema = builder
+        .select(['email', 'minlen', 'maxlen'])
+        .setRequired(['minlen', 'maxlen'])
+        .build()
+
+      if (schema.minlen.required.msg && schema.maxlen.required.msg) done()
     })
   })
 })

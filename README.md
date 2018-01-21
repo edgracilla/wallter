@@ -116,8 +116,8 @@ Methods                                        | Description
 **select(*paths*)**                             | Get specific field from pre generated schema (if mongoose model were attached)<br><br>***param:*** *paths {(string\|string[])} - path to property to validate`*
 **setLocation(*loc*)**                          | Adds specific location (in each property to validate, or to the selected ones) on where to pull the data. *currently supported locations are 'params', 'query', 'body'*<br><br>***param:*** *loc {string} - possible values are: params\|query\|body*
 **setLocations(*options*)**                     | Multiple location setting. <br><br>***param:*** *options {object} - {location: [fieldPath, ...], ...}*<br>e.g. `{query: ['_id'], body: ['foo.bar', 'arr.*.foo.bar']}`
-**setOptional(*path*)**                         | Set field to validate as optional<br><br>***param:*** *path {string}  - path to property to validate*
-**setRequired(*path*)**                         | Set field to validate as required<br><br>***param:*** *path {string}  - path to property to validate*
+**setOptional(*path*)**                         | Set field to validate as optional<br><br>***param:*** *path {(string\|string[])}  - path to property to validate*
+**setRequired(*path*)**                         | Set field to validate as required<br><br>***param:*** *path {(string\|string[])}  - path to property to validate*
 **unstrict(*arrPath*)**                         | Setting array of objects as optional even if object property inside is required<br><br>***param:*** *arrPath {(string\|string[])} - path to property*
 
 # Error Messages
